@@ -5,6 +5,7 @@ import com.tullave.recharge.dto.RechargeResponse;
 import com.tullave.recharge.service.RechargeService;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @RestController
 @Validated
@@ -49,8 +52,18 @@ public class RechargeController {
                 message = "Card number must contain exactly 16 digits"
         )
          String cardNumber,
-         Pageable pageable
+        
+        @RequestParam(defaultValue = "0")
+        @Min(value = 0, message = "Page must be greater than or equal to 0")
+        int page,
+
+        @RequestParam(defaultValue = "10")
+        @Min(value = 1, message = "Size must be greater than 0")
+        @Max(value = 100, message = "Size must not exceed 100")
+        int size
     ) {
+        Pageable pageable = PageRequest.of(page, size);
+
         Page<RechargeResponse> response = rechargeService.getRecharges(cardNumber, pageable);
 
         return ResponseEntity.ok(response);
