@@ -28,3 +28,29 @@ This project was developed as part of a technical assessment to demonstrate:
 * Request validation and error handling
 * Containerized application and database setup
 * Clean and maintainable code practices
+
+## Testing
+
+The project includes automated tests using JUnit 5, Mockito, and Spring MVC Test.
+
+### Test Coverage
+
+The test suite covers the main recharge business flows and HTTP endpoints:
+
+- Recharge creation with valid data.
+- Request validation for card number and recharge amount.
+- Recharge retrieval with pagination.
+- Recharge retrieval filtered by card number.
+- Pagination parameter validation.
+- Recharge deletion.
+- Handling of non-existing recharges.
+- Invalid payment methods.
+- Global exception handling.
+- Service and repository interactions.
+
+### Running Tests
+
+Run the complete test suite with:
+
+```bash
+mvn clean test

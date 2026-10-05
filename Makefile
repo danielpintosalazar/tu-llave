@@ -4,5 +4,8 @@ build:
 compile:
 	mvn clean compile
 
+test:
+	mvn test
+
 run:
 	mvn spring-boot:run
