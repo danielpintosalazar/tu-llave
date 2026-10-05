@@ -12,12 +12,12 @@
         <relativePath />
     </parent>
 
-    <groupId>com.example</groupId>
-    <artifactId>spring-learning</artifactId>
+    <groupId>com.tullave</groupId>
+    <artifactId>tullave-recharge</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>spring-learning</name>
-    <description>Spring Boot learning project</description>
+    <name>tullave-recharge</name>
+    <description>TuLlave Recharge API</description>
 
     <properties>
         <java.version>21</java.version>
