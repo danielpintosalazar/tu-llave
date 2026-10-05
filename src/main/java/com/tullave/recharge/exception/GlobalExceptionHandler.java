@@ -39,6 +39,23 @@ public class GlobalExceptionHandler {
             .body(errorResponse);
     }
 
+    @ExceptionHandler(RechargeNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRechargeNotFoundException(
+        RechargeNotFoundException exception
+    ) {
+        log.warn("Recharge not found: {}", exception.getMessage());
+
+        ErrorResponse errorResponse = new ErrorResponse(
+            HttpStatus.NOT_FOUND.value(),
+            exception.getMessage(),
+            LocalDateTime.now()
+        );
+
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(errorResponse);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpectedException(
         Exception exception
