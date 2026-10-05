@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import jakarta.validation.ConstraintViolationException;
+
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -53,6 +55,29 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
+            .body(errorResponse);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(
+            ConstraintViolationException exception
+    ) {
+        String message = exception.getConstraintViolations()
+            .stream()
+            .findFirst()
+            .map(violation -> violation.getMessage())
+            .orElse("Validation error");
+
+        log.warn("Validation error: {}", message);
+
+        ErrorResponse errorResponse = new ErrorResponse(
+            HttpStatus.BAD_REQUEST.value(),
+            message,
+            LocalDateTime.now()
+        );
+
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
             .body(errorResponse);
     }
 
