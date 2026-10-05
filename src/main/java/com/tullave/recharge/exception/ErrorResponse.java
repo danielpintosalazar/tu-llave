@@ -1,7 +1,10 @@
 package com.tullave.recharge.exception;
 
+import java.time.LocalDateTime;
+
 public record ErrorResponse (
     int status,
-    String message
+    String message,
+    LocalDateTime timestamp
 ) {}
 
