@@ -54,3 +54,25 @@ Run the complete test suite with:
 
 ```bash
 mvn clean test
+```
+
+## Postman Collection
+
+A Postman collection is included in the `postman/` directory with successful and error scenarios for the recharge API.
+
+The collection covers:
+
+- Recharge creation.
+- Request validation.
+- Recharge retrieval with pagination.
+- Recharge retrieval by card number.
+- Pagination validation.
+- Recharge deletion.
+- Non-existing recharge handling.
+- Invalid payment methods.
+
+Import the collection into Postman and configure the `baseUrl` environment variable:
+
+```text
+http://localhost:8080
+```
